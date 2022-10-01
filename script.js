@@ -22,7 +22,7 @@ var uppercase = confirm("Include lowercase is set to " + lowercase + ".\n\nDo yo
 var numerical = confirm("Include uppercase is set to " + uppercase + ".\n\nDo you want to include numerical characters?\n\nPress 'OK' for yes, press 'Cancel' for no.");
 var special = confirm("Include lowercase is set to " + numerical + ".\n\nDo you want to include special characters?\n\nPress 'OK' for yes, press 'Cancel' for no.");
 
-// User input is verfied to be valid.
+// User settings are verfied to be valid.
 if (lowercase == false && uppercase == false && numerical == false && special == false) {
   return alert ("Password must include characters.");
 }
