@@ -1,4 +1,4 @@
-# Module 1 Challenge
+# Module 3 Challenge
 
 ## Description
 
