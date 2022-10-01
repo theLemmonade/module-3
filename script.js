@@ -1,10 +1,10 @@
 // Declare variables, define which characters the password can be generated comprising.
-var lowChar = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-var uppChar = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-var numChar = ['0','1','2','3','4','5','6','7','8','9'];
-var speChar = ['~','!','@','#','$','%','^','&','*','(',')','-','_','=','+',':', ';',',','.','?'];
-var char = "";
 var size = "";
+var loChar = ['abcdefghijklmnopqrstuvwxyz'];
+var upChar = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+var nuChar = ['0123456789'];
+var spChar = ['~!@#$%^&*()-_=+:;.,?'];
+var input = "";
 var output ="";
 
 // A series of window prompts will define password settings.
@@ -17,45 +17,44 @@ if (size < 8 || size > 128 || isNaN(size)) {
 }
 
 // Case, special, and numerical characters are defined by user as boolean.
-var lowercase = confirm("Your password will be " + size + " characters long.\n\nDo you want to include lower case characters?");
-var uppercase = confirm("Include lowercase is set to " + lowercase + ".\n\nDo you want to include uppercase characters?");
-var numerical = confirm("Include uppercase is set to " + uppercase + ".\n\nDo you want to include numerical characters?");
-var special = confirm("Include lowercase is set to " + numerical + ".\n\nDo you want to include special characters?");
+var lowercase = confirm("Your password will be " + size + " characters long.\n\nDo you want to include lower case characters?\n\nPress 'OK' for yes, press 'Cancel' for no.");
+var uppercase = confirm("Include lowercase is set to " + lowercase + ".\n\nDo you want to include uppercase characters?\n\nPress 'OK' for yes, press 'Cancel' for no.");
+var numerical = confirm("Include uppercase is set to " + uppercase + ".\n\nDo you want to include numerical characters?\n\nPress 'OK' for yes, press 'Cancel' for no.");
+var special = confirm("Include lowercase is set to " + numerical + ".\n\nDo you want to include special characters?\n\nPress 'OK' for yes, press 'Cancel' for no.");
 
 // User input is verfied to be valid.
 if (lowercase == false && uppercase == false && numerical == false && special == false) {
   return alert ("Password must include characters.");
 }
 
-// User defined settings are console logged for reference.
+// Concatenate an array of characters defined as "input".
+if (lowercase) {
+  input = input.concat(loChar);
+}
+if (uppercase) {
+  input = input.concat(upChar);
+}
+if (numerical) {
+  input = input.concat(nuChar);
+}
+if (special) {
+  input = input.concat(spChar);
+}
+
+// Console log user-defined settings
 console.log("Length: " + size);
 console.log("Include lowercase: " + lowercase);
 console.log("Include uppercase: " + uppercase);
 console.log("Include numerical: " + numerical);
 console.log("Include special: " + special);
-
-// Generate an array comprised of user defined character settings.
-if (lowercase) {
-  char = char.concat(lowChar);
-}
-if (uppercase) {
-  char = char.concat(uppChar);
-}
-if (numerical) {
-  char = char.concat(numChar);
-}
-if (lowercase) {
-  char = char.concat(lowChar);
-}
-
-// Character array is console logged for reference.
-console.log("Character settings: " + char)
+console.log("Character settings: " + input)
 
 // Password is generated
 for (var i = 0; i <= size; i++) {
-  let randomize = [Math.floor(Math.random() * char.length)];
-  output = output + char[randomize];
+  let randomize = [Math.floor(Math.random() * input.length)];
+  output = output + input[randomize];
 }
+console.log("Password generated: " + output)
 return output;
 }
 
@@ -66,9 +65,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var output = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = output;
-
 }
 
 // Add event listener to generate button
